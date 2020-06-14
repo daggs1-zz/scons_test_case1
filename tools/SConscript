@@ -1,0 +1,7 @@
+Import('env')
+
+shared_defs_build = env.Make(env['T'] + '/defs_gen', [], make_path = 'tools/defs_gen')
+
+env['defs_gen'] = env.Command(env['T'] + '/defs_gen1', shared_defs_build, action = env['T'] + '/defs_gen')
+
+
