@@ -5,9 +5,8 @@ def builder(target, source, env):
 	path = env['make_path']
 	cmd = 'make -C ' + path
 	shell_env = dict()
-
-	shell_env['PATH'] = ':'.join(host_path)
 	shell_env['PREFIX'] = Dir(env['T']).abspath
+	shell_env['PATH'] = 'usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 
 	shell_exec = subprocess.Popen(cmd, bufsize = 0, env = shell_env, shell = True)
 	return shell_exec.wait()
