@@ -1,4 +1,4 @@
 
 include consts.asm
 
-	mov eax,AAAAA
+mov eax,AAAAA

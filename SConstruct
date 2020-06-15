@@ -13,6 +13,8 @@ def builder(target, source, env):
 
 env = Environment(O = '#/output/debug/build', T = '#/output/debug/target')
 env.Append(BUILDERS = { 'Make' : env.Builder(action = env.Action(builder)) })
-
+env['AS'] = 'as86'
 sub_folders = [ 'tools', 'src' ]
 SConscript(dirs = sub_folders, exports = 'env')
+env['ASCOM'] = 'cd $SOURCES.dir && $AS $ASFLAGS -o $TARGET.abspath $SOURCES.file'
+print(env['defs_gen'])

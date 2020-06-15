@@ -2,6 +2,9 @@ Import('env')
 
 shared_defs_build = env.Make(env['T'] + '/defs_gen', [], make_path = 'tools/defs_gen')
 
-env['defs_gen'] = env.Command(env['T'] + '/defs_gen1', shared_defs_build, action = env['T'] + '/defs_gen')
+defs_path = Dir(env['T']).abspath + '/consts/asm-code'
+ttttt = env.Command(env['T'] + '/defs_gen1', shared_defs_build, action = [ Mkdir(defs_path),
+									   Dir(env['T']).path + '/defs_gen ' + defs_path ])
+env['defs_gen'] = env.Command(Dir(env['T']).abspath + '/consts/asm-code/consts.asm', ttttt, Touch('$TARGET'))
 
 

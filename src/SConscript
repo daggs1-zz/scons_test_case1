@@ -1,11 +1,13 @@
 
 Import('env')
 
+import os
+
 def symlink(target, source, env):
         os.symlink(os.path.abspath(str(source[0])), os.path.abspath(str(target[0])))
 
 asm_work_dir = env['O'] + '/asm-code'
-asm_src_link = env.Command(asm_work_dir + '/code.asm', '#/asm-code/code.asm', symlink)
+asm_src_link = env.Command(asm_work_dir + '/code.asm', '#/src/asm-code/code.asm', symlink)
 asm_const_link = env.Command(asm_work_dir + '/consts.asm', env['T'] + '/consts/asm-code/consts.asm', symlink)
 env.Depends(asm_src_link, env.Depends(asm_const_link, env['T'] + '/consts/asm-code/consts.asm'))
 env.Depends(asm_const_link, env['defs_gen'])
